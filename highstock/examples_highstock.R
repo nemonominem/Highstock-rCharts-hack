@@ -2,6 +2,7 @@
 
 require(rCharts)
 require(quantmod)
+require(plyr)
 
 # Specify period of time we are interested in
 startDate <- as.Date("2010-01-01")
@@ -34,12 +35,23 @@ getQData <- function(fun)
 
 stocks  <- do.call(rbind, lapply(tickers, getQData(OHLCV)))
 
+##
+## Standard plots
+
+# One stock
+sPlot(Close ~ date, data = aapl, title='AAPL') # Default is line
+sPlot(Close ~ date, data = aapl, title='AAPL', type='column') # Default is line
+sPlot(Close ~ date, data = aapl, title='AAPL', type='area') # Default is line
+
+# Multiple stocks
+# The legend is clickable
+sPlot(Close ~ date, data = stocks, title='A few stocks', group='stock') # Default is line
+
+##
+## OHLC / Candlestick plots
+
 # One stock only
 aapl    <- subset(stocks, stock=='AAPL')
-
-
 ohlcvPlot(data = aapl, name='AAPL' )
 ohlcvPlot(data = aapl, name='AAPL', type='ohlc')
-
-ohlcPlot( data = aapl, name='AAPL' )
 
