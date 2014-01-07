@@ -119,7 +119,5 @@ sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NUL
     ## subtitle
     rChart$subtitle(text = subtitle, replace = T)
     
-    ## GD: My mods from here
-    
     return(rChart$copy())
 }
