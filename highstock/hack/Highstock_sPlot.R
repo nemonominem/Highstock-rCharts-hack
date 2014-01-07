@@ -87,6 +87,8 @@ sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NUL
                         )
                         return(NULL)
                     })
+                    
+        rChart$legend(enabled = TRUE)
     } else
     {
         rChart$series(
