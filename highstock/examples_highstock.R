@@ -39,6 +39,7 @@ stocks  <- do.call(rbind, lapply(tickers, getQData(OHLCV)))
 ## Standard plots
 
 # One stock
+aapl    <- subset(stocks, stock=='AAPL')
 sPlot(Close ~ date, data = aapl, title='AAPL') # Default is line
 sPlot(Close ~ date, data = aapl, title='AAPL', type='column') # Default is line
 sPlot(Close ~ date, data = aapl, title='AAPL', type='area') # Default is line
@@ -51,7 +52,6 @@ sPlot(Close ~ date, data = stocks, title='A few stocks', group='stock') # Defaul
 ## OHLC / Candlestick plots
 
 # One stock only
-aapl    <- subset(stocks, stock=='AAPL')
 ohlcvPlot(data = aapl, name='AAPL' )
 ohlcvPlot(data = aapl, name='AAPL', type='ohlc')
 
