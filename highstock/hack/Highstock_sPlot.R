@@ -1,32 +1,6 @@
 # Utils
 is.categorical <- function(x) is.factor(x) || is.character(x)
 
-# Custom setSpec method that also accepts list as an argument
-# - for series, xAxis and yAxis
-setListSpec <- function(obj, ..., replace)
-{
-    args <- list(...)
-    
-    if (length(args) == 1 && is.list(args[[1]]) && is.null(names(args))) {
-        args <- args[[1]]
-    } else {
-        args <- list(args)
-    }
-    
-    # Convert data values to a list (fixes issue 138)
-    args <- lapply(args, function(x) {
-        if (!is.null(x$data) && !is.list(x$data)){
-            x$data <- as.list(x$data)
-        }
-        return(x)
-    })
-    
-    if (replace) {
-        obj <<- args
-    } else {
-        obj <<- c(obj, args)
-    }
-}
 
 #' Highstock Plot
 #'
@@ -37,7 +11,7 @@ setListSpec <- function(obj, ..., replace)
 #' @param title chart title
 #' @param subtitle chart subttitle
 #' @param group.na replace NA's with chosen value in the group column, or else these observations will be removed
-sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NULL, group.na = NULL)
+sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NULL, group.na = NULL, navigator = TRUE)
 {
     rChart <- Highstock$new()
     
@@ -118,6 +92,10 @@ sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NUL
     
     ## subtitle
     rChart$subtitle(text = subtitle, replace = T)
+        
+    ## navigator and scrollbar panel
+    rChart$navigator(enabled = navigator, replace = T)
+    rChart$scrollbar(enabled = navigator, replace = T)
     
     return(rChart$copy())
 }
