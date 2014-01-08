@@ -5,7 +5,7 @@ Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
         
         params <<- c(params, list(
                                 credits = list(href = NULL, text = NULL),
-                                exporting = list(enabled = F),
+                                exporting = list(enabled = T),
                                 title = list(text = NULL),
                                 yAxis = list(title = list(text = NULL))
                             ))
@@ -98,6 +98,14 @@ Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
     
     yAxis = function(..., replace = T) {
         params$yAxis <<- setListSpec(params$yAxis, ..., replace = replace)
+    },
+    
+    navigator = function(..., replace = T) {
+        params$navigator <<- setSpec(params$navigator, ..., replace = replace)
+    },
+    
+    scrollbar = function(..., replace = T) {
+        params$scrollbar <<- setSpec(params$scrollbar, ..., replace = replace)
     },
     
     # Custom add data method
