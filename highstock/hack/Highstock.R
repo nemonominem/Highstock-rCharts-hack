@@ -1,3 +1,30 @@
+# Custom setSpec method that also accepts list as an argument
+# - for series, xAxis and yAxis
+setListSpec <- function(obj, ..., replace)
+{
+    args <- list(...)
+    
+    if (length(args) == 1 && is.list(args[[1]]) && is.null(names(args))) {
+        args <- args[[1]]
+    } else {
+        args <- list(args)
+    }
+    
+    # Convert data values to a list (fixes issue 138)
+    args <- lapply(args, function(x) {
+        if (!is.null(x$data) && !is.list(x$data)){
+            x$data <- as.list(x$data)
+        }
+        return(x)
+    })
+    
+    if (replace) {
+        obj <<- args
+    } else {
+        obj <<- c(obj, args)
+    }
+}
+
 Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
     initialize = function()
     {
