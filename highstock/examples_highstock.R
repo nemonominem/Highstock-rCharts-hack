@@ -43,10 +43,25 @@ aapl    <- subset(stocks, stock=='AAPL')
 sPlot(Close ~ date, data = aapl, title='AAPL') # Default is line
 sPlot(Close ~ date, data = aapl, title='AAPL', type='column') # Default is line
 sPlot(Close ~ date, data = aapl, title='AAPL', type='area') # Default is line
+sPlot(Close ~ date, data = aapl, title='AAPL', type='area', navigator=F) # Default is line
+
+# Try switching off some highstock features
+s <- sPlot(Close ~ date, data = aapl, title='AAPL', type='area'); s
+s$rangeSelector(enabled = FALSE, replace = T); s
+s$exporting(enabled = FALSE, replace = T); s
+s$navigator(enabled = FALSE); s
+s$scrollbar(enabled = FALSE); s
+s$params
 
 # Multiple stocks
 # The legend is clickable
 sPlot(Close ~ date, data = stocks, title='A few stocks', group='stock') # Default is line
+
+# Try modifying the geometry of the container
+options(RCHART_WIDTH = 1200, RCHART_HEIGHT = 900)
+s <- sPlot(Close ~ date, data = stocks, title='A few stocks', group='stock') # Default is line
+s
+s$exporting(sourceWidth = 800, sourceHeight = 600, scale = 2); s
 
 ##
 ## OHLC / Candlestick plots
