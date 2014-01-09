@@ -1,7 +1,6 @@
 # Utils
 is.categorical <- function(x) is.factor(x) || is.character(x)
 
-
 #' Highstock Plot
 #'
 #' ...
@@ -61,7 +60,7 @@ sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NUL
                         )
                         return(NULL)
                     })
-                    
+        
         rChart$legend(enabled = TRUE)
     } else
     {
@@ -92,7 +91,7 @@ sPlot <- highstockPlot <- function(..., radius = 3, title = NULL, subtitle = NUL
     
     ## subtitle
     rChart$subtitle(text = subtitle, replace = T)
-        
+    
     ## navigator and scrollbar panel
     rChart$navigator(enabled = navigator, replace = T)
     rChart$scrollbar(enabled = navigator, replace = T)
