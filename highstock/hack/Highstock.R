@@ -46,7 +46,7 @@ Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
         list(chartParams = toJSON2(params, digits = 13), chartId = chartId)
     },
     
-    #' Wrapper methods
+    # Wrapper methods
     chart = function(..., replace = T)
     {
         params$chart <<- setSpec(params$chart, ..., replace = replace)
@@ -95,9 +95,10 @@ Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
         params$navigation <<- setSpec(params$navigation, ..., replace = replace)
     },
     
-    pane = function(..., replace = T){
-        params$pane <<- setSpec(params$pane, ..., replace = replace)
-    },
+    # Pane is not in Highstock
+    #pane = function(..., replace = T){
+    #    params$pane <<- setSpec(params$pane, ..., replace = replace)
+    #},
     
     plotOptions = function(..., replace = T){
         params$plotOptions <<- setSpec(params$plotOptions, ..., replace = replace)
@@ -127,6 +128,7 @@ Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
         params$yAxis <<- setListSpec(params$yAxis, ..., replace = replace)
     },
     
+    # >>> Specific to Highstock
     navigator = function(..., replace = T) {
         params$navigator <<- setSpec(params$navigator, ..., replace = replace)
     },
@@ -135,7 +137,13 @@ Highstock <- setRefClass("Highstock", contains = "rCharts", methods = list(
         params$scrollbar <<- setSpec(params$scrollbar, ..., replace = replace)
     },
     
+    rangeSelector = function(..., replace = T) {
+        params$rangeSelector <<- setSpec(params$rangeSelector, ..., replace = replace)
+    },
+    # <<< Specific to Highstock
+    
     # Custom add data method
+    #!! Seems to mostly work but may need to be adpated to highstock
     data = function(x = NULL, y = NULL, ...)
     {
         if (is.data.frame(x))
