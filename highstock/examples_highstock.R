@@ -55,7 +55,10 @@ s$params
 
 # Multiple stocks
 # The legend is clickable
-sPlot(Close ~ date, data = stocks, title='A few stocks', group='stock') # Default is line
+s <- sPlot(Close ~ date, data = stocks, title = 'A few stocks', group = 'stock') # Default is line
+s
+s$legend(enabled = T, align = 'left', verticalAlign = 'middle', layout = 'vertical', replace = T)
+s
 
 # Try modifying the geometry of the container
 options(RCHART_WIDTH = 1200, RCHART_HEIGHT = 900)
